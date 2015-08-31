@@ -13,6 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
     CoordinatorLayout rootLayout;
     FloatingActionButton fabBtn;
 
+    LinearLayout linearLayout_1;
+    LinearLayout linearLayout_2;
+    LinearLayout linearLayout_3;
+    LinearLayout linearLayout_4;
+    LinearLayout linearLayout_5;
+    LinearLayout linearLayout_6;
+    LinearLayout linearLayout_7;
+    LinearLayout linearLayout_8;
+    LinearLayout linearLayout_9;
+    ImageView imageViewOne;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +47,44 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initInstances();
+
+        //Anim LL
+        LinearLayout[] layoutsArray = new LinearLayout[9];
+        linearLayout_1 = (LinearLayout) findViewById(R.id.ll_1);
+        linearLayout_2 = (LinearLayout) findViewById(R.id.ll_2);
+        linearLayout_3 = (LinearLayout) findViewById(R.id.ll_3);
+        linearLayout_4 = (LinearLayout) findViewById(R.id.ll_4);
+        linearLayout_5 = (LinearLayout) findViewById(R.id.ll_5);
+        linearLayout_6 = (LinearLayout) findViewById(R.id.ll_6);
+        linearLayout_7 = (LinearLayout) findViewById(R.id.ll_7);
+        linearLayout_8 = (LinearLayout) findViewById(R.id.ll_8);
+        linearLayout_9 = (LinearLayout) findViewById(R.id.ll_9);
+        layoutsArray[0] = linearLayout_1;
+        layoutsArray[1] = linearLayout_2;
+        layoutsArray[2] = linearLayout_3;
+        layoutsArray[3] = linearLayout_4;
+        layoutsArray[4] = linearLayout_5;
+        layoutsArray[5] = linearLayout_6;
+        layoutsArray[6] = linearLayout_7;
+        layoutsArray[7] = linearLayout_8;
+        layoutsArray[8] = linearLayout_9;
+
+        imageViewOne = (ImageView)findViewById(R.id.iv_one);
+
+        for (int i = 0; i < 9; i++) {
+            Animation anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.anim_item);
+            if (i == 0) {
+                anim.setStartOffset(10);
+            } else {
+                anim.setStartOffset(100 * (i + 1));
+            }
+            layoutsArray[i].setAnimation(anim);
+
+        }
+        Animation animIV = AnimationUtils.loadAnimation(MainActivity.this, R.anim.anim_item_img);
+        animIV.setStartOffset(2100);
+        imageViewOne.setAnimation(animIV);
+
     }
 
     private void initToolbar() {
@@ -65,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-        collapsingToolbarLayout.setTitle("Android Developer");
+        collapsingToolbarLayout.setTitle("Android");
     }
 
     @Override
